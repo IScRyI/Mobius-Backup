@@ -11,5 +11,7 @@ int main(int argc, char* argv[]) {
 }
 void SDL_erreur_gestion() {
 //a finir
+//intéressant pour limité le nombre d'entré de la fonction ainsi que le risque d'erreur il exisite potenciellement la meme chose pour le rendu.
+//SDL_GetWindowFlags(SDL_Window* window)
 }
 

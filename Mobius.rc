@@ -1,0 +1,24 @@
+id ICON "image\icone.ico"
+1 VERSIONINFO
+FILEVERSION     0,1
+PRODUCTVERSION  0,1
+BEGIN
+  BLOCK "StringFileInfo"
+  BEGIN
+    BLOCK "040904B0"
+    BEGIN
+        VALUE "CompanyName", "ScRy"
+        VALUE "FileDescription", "Simplement un lecteur de musique."
+        VALUE "FileVersion", "0.1"
+        VALUE "InternalName", "Mobius"
+        VALUE "LegalCopyright", "Mobius"
+        VALUE "OriginalFilename", "Mobius.exe"
+        VALUE "ProductName", "Mobius"
+        VALUE "ProductVersion", "0.1"
+    END
+  END
+  BLOCK "VarFileInfo"
+  BEGIN
+    VALUE "Translation", 0x040C, 65001
+  END
+END
