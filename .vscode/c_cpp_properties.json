@@ -1,0 +1,38 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/include",
+                "C:/MinGW/**"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "windowsSdkVersion": "10.0.19041.0",
+            "compilerPath": "C:/MinGW/bin/gcc.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-x86",
+            "compilerArgs": [
+                "-Wall",
+                "-std=c11",
+                "src\\*.c",
+                "-I\"include\" ",
+                "-I\"C:\\libsdl\\include\" ",
+                "-L\"C:\\libsdl\\lib\" ",
+                "-lmingw32 ",
+                "-lSDL2main ",
+                "-lSDL2 ",
+                "-lSDL2_image ",
+                "-lSDL2_net ",
+                "-lSDL2_mixer ",
+                "-lSDL2_ttf ",
+                "-o \"build\\Lecteur_de_Musique.exe\""
+            ]
+        }
+    ],
+    "version": 4
+}

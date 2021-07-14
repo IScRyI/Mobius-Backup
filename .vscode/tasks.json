@@ -1,0 +1,40 @@
+﻿{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "C/C++: gcc.exe générer le fichier actif",
+            "command": "C:/MinGW/bin/gcc.exe",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\build\\${fileBasenameNoExtension}.exe",
+
+                "-std=c11",
+                "-I\"include\" ",
+                "-I\"C:\\libsdl\\include\" ",
+                "-L\"C:\\libsdl\\lib\" ",
+                "-lmingw32 ",
+                "-lSDL2main ",
+                "-lSDL2 ",
+                "-lSDL2_image ",
+                "-lSDL2_net ",
+                "-lSDL2_mixer ",
+                "-lSDL2_ttf ",
+                "-o"
+            ],
+            "options": {
+                "cwd": "C:/MinGW/bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Tâche générée par le débogueur."
+        }
+    ],
+    "version": "2.0.0"
+}
