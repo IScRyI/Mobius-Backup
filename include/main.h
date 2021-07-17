@@ -9,8 +9,8 @@
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_mixer.h>
 #define NOM_LOGICIEL "Lecteur de Musique"
-#define DIMENSION_W 1280
-#define DIMENSION_H 720
+#define DIMENSION_W 1600
+#define DIMENSION_H 900
 void SDL_erreur_gestion();
 //code erreur
 #define ERROR_INIT_SDL 0x0
