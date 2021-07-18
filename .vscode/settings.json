@@ -3,5 +3,6 @@
         "main.h": "c",
         "cstdlib": "c"
     },
-    "C_Cpp.errorSquiggles": "Enabled"
+    "C_Cpp.errorSquiggles": "Enabled",
+    "discord.enabled": true
 }
