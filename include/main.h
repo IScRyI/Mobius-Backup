@@ -1,7 +1,9 @@
 #ifndef LECTEUR_DE_MUSIQUE_MAIN_H
 #define LECTEUR_DE_MUSIQUE_MAIN_H
+//bibliotéque inclue
 #include <stdlib.h>
 #include <stdio.h>
+#include <stddef.h>
 #include <string.h>
 #include <math.h>
 #include <SDL2/SDL.h>
