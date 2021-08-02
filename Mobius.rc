@@ -8,7 +8,7 @@ BEGIN
     BLOCK "040904B0"
     BEGIN
         VALUE "CompanyName", "ScRy"
-        VALUE "FileDescription", "Simplement un lecteur de musique."
+        VALUE "FileDescription", "Mobius"
         VALUE "FileVersion", "0.1"
         VALUE "InternalName", "Mobius"
         VALUE "LegalCopyright", "Mobius"
