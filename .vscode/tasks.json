@@ -1,4 +1,4 @@
-﻿{
+{
     "tasks": [
         {
             "type": "cppbuild",
@@ -9,7 +9,6 @@
                 "${file}",
                 "-o",
                 "${fileDirname}\\build\\${fileBasenameNoExtension}.exe",
-
                 "-std=c11",
                 "-I\"include\" ",
                 "-I\"C:\\libsdl\\include\" ",
@@ -21,7 +20,6 @@
                 "-lSDL2_net ",
                 "-lSDL2_mixer ",
                 "-lSDL2_ttf ",
-                "-o"
             ],
             "options": {
                 "cwd": "C:/MinGW/bin"
