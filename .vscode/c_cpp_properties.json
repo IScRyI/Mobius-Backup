@@ -4,7 +4,8 @@
             "name": "Win32",
             "includePath": [
                 "${workspaceFolder}/include",
-                "C:/MinGW/**"
+                "C:/MinGW/**",
+                "C:/msys64/mingw64/include"
             ],
             "defines": [
                 "_DEBUG",
