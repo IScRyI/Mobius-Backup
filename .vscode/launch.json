@@ -4,6 +4,7 @@
     // Pour plus d'informations, visitez : https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        
 
     {
         "name": "(Windows) Lancer",
@@ -20,7 +21,7 @@
             "name": "gcc.exe - Générer et déboguer le fichier actif",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            "program": "C:\\Users\\Kilian\\Documents\\MEGAsync\\Shmup\\Script Divers\\Mobius\\build\\Mobius.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "C:/MinGW/bin",

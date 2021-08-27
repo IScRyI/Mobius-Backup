@@ -3,9 +3,12 @@ int Fenetre_principal() {
     SDL_Window *fenetre = SDL_CreateWindow(NOM_LOGICIEL,SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED,DIMENSION_W,DIMENSION_H,SDL_WINDOW_BORDERLESS);
     SDL_Renderer *renderer_fenetre = SDL_CreateRenderer(fenetre,-1,SDL_RENDERER_ACCELERATED);
     //importation des image
-    SDL_Texture *data_img = Image_loader("image/data_img.bin",renderer_fenetre);
-    //Fonction interface
+    SDL_Texture *data_img = Image_loader("image/data_img.bin",renderer_fenetre,TEXTURE);
+    //Fonction initialisation interface
     Initialisation_interface(renderer_fenetre,data_img);
+    Initialisation_accueil(renderer_fenetre,data_img);
+    SDL_Rect test = {50,25};
+    Modification_tileset(renderer_fenetre,Image_loader("image/hq720.jpg",renderer_fenetre,SURFACE),"Source.png","image/1.png",&test);
     //Rendu (a supprimer)
     SDL_RenderPresent(renderer_fenetre);
     SDL_Delay(3000);
@@ -113,16 +116,44 @@ _Bool Initialisation_interface(SDL_Renderer *renderer_fenetre,SDL_Texture *data_
     TTF_CloseFont(roboto_bold);
     TTF_CloseFont(roboto_black);
 }
-SDL_Texture *Image_loader(char *chemin_image,SDL_Renderer *renderer_fenetre) {
+_Bool Initialisation_accueil(SDL_Renderer *renderer_fenetre,SDL_Texture *data_img) {
+    //gestion des erreur a inclure
+    //ajouter appel de fonction de correction de resolution
+    //Initialisation des polices
+    TTF_Font* leelawadee_bold = TTF_OpenFont("police/leelawadee-bold.ttf",15);
+    TTF_Font* notojp_regular = TTF_OpenFont("police/NotoSansJP-Regular.otf",15);
+    
+}
+_Bool Nettoyage_renderer(SDL_Renderer *renderer_fenetre) {
+    //gestion des erreur a inclure
+    //ajouter appel de fonction de correction de resolution
+    //Strucutre contenant le rectangle de nettoyage
+    SDL_Rect clean_zone_principal = {241,54,1359,755};
+    //initialisation du rectangle de nettoyage
+    RENDER_SET_NOIR_121212(renderer_fenetre)
+    SDL_RenderFillRect(renderer_fenetre,&clean_zone_principal);
+}
+void *Image_loader(char *chemin_image,SDL_Renderer *renderer_fenetre,_Bool type_de_donnee) {
     //gestion des erreur a inclure
     SDL_Surface *image_surface = IMG_Load(chemin_image);
-    SDL_Texture *image_texture = SDL_CreateTextureFromSurface(renderer_fenetre,image_surface);
-    SDL_FreeSurface(image_surface);
-    SDL_SetTextureBlendMode(image_texture,SDL_BLENDMODE_BLEND);
-    return image_texture;
+    if (type_de_donnee) {
+        SDL_Texture *image_texture = SDL_CreateTextureFromSurface(renderer_fenetre,image_surface);
+        SDL_FreeSurface(image_surface);
+        SDL_SetTextureBlendMode(image_texture,SDL_BLENDMODE_BLEND);
+        return image_texture;
+    }
+    SDL_SetSurfaceBlendMode(image_surface,SDL_BLENDMODE_BLEND);
+    return image_surface;
 }
-SDL_Texture *Police_rendu_texture(TTF_Font* police,int quality,char *texte,SDL_Color couleur_police,SDL_Color couleur_fond_shaded,SDL_Rect *dimension_texture,SDL_Renderer *renderer_fenetre) {
-    SDL_Surface* surface_police;
+SDL_Surface *Troncage_sdl_surface(SDL_Surface *surface,SDL_Rect *info_surface) {
+    SDL_Surface *truncate_surface = SDL_CreateRGBSurface(NULL,info_surface->w,info_surface->h,32,NULL,NULL,NULL,NULL);
+    SDL_SetSurfaceBlendMode(surface,SDL_BLENDMODE_BLEND);
+    SDL_BlitSurface(surface,NULL,truncate_surface,info_surface);
+    SDL_FreeSurface(surface);
+    return truncate_surface;
+}
+SDL_Texture *Police_rendu_texture(TTF_Font *police,int quality,char *texte,SDL_Color couleur_police,SDL_Color couleur_fond_shaded,SDL_Rect *dimension_texture,SDL_Renderer *renderer_fenetre) {
+    SDL_Surface *surface_police;
     if(quality == SOLID) {
         surface_police = TTF_RenderUTF8_Solid(police,texte,couleur_police);
     }
@@ -138,7 +169,50 @@ SDL_Texture *Police_rendu_texture(TTF_Font* police,int quality,char *texte,SDL_C
     SDL_Texture *texture_police = SDL_CreateTextureFromSurface(renderer_fenetre,surface_police); 
     SDL_FreeSurface(surface_police);
     SDL_SetTextureBlendMode(texture_police,SDL_BLENDMODE_BLEND);
-    int x,y;
     SDL_QueryTexture(texture_police,NULL,NULL,&(dimension_texture->w),&(dimension_texture->h));
     return texture_police;
 }
+SDL_Banque_Image_Data Modification_tileset(SDL_Renderer *renderer_fenetre,SDL_Surface *tileset,char *chemin_image_nom_format,char *chemin_image_add,SDL_Rect *information_image_add) {
+    //inutile de fournir les dimension d'une image dans la structure SDL_Rect a part si aucune image et fournie 
+    //conditionnel permetant d'ajouté sois un carré blanc sois l'image selon les paramétre utilisé lors de l'appel de fonction (si aucun image n'est envoyé dans l'appel de fonction se sera un rectangle blanc) 
+    if (chemin_image_add == NULL) {
+        //création d'une zone blanche ayant des dimension définie par les paramétre de l'appel de fonction
+        SDL_FillRect(tileset,information_image_add, SDL_MapRGBA(tileset->format,255,255,255,255));
+    }
+    else {
+        //structure contenant la matrice de pixel de l'image a ajouté ainsi que les information lié a cette dernière 
+        SDL_Surface *image_add = Image_loader(chemin_image_add,renderer_fenetre,SURFACE);
+        //récuperation des dimension de l'image a ajouté
+        information_image_add->w = image_add->w,information_image_add->h = image_add->h;
+        //définition du mode de mélange alpha numérique de la surface a  ajouté
+        SDL_SetSurfaceBlendMode(image_add,SDL_BLENDMODE_BLEND);
+        //structure contenant les information de la tileset
+        SDL_Rect tileset_info = {0,0
+        ,(((information_image_add->x+information_image_add->w)>tileset->w) ? (information_image_add->x+information_image_add->w) : tileset->w)
+        ,(((information_image_add->y+information_image_add->h)>tileset->h) ? (information_image_add->y+information_image_add->h) : tileset->h)
+        };
+        tileset = Troncage_sdl_surface(tileset,&tileset_info);
+        //ajoute de l'image sur la tileset
+        printf("information_image_add.x = %d\ninformation_image_add.y = %d\n"
+        "information_image_add.w = %d\ninformation_image_add.h = %d\n"
+        ,information_image_add->x,information_image_add->y,information_image_add->w,information_image_add->h);
+        int a = SDL_BlitSurface(image_add,NULL,tileset,information_image_add);
+        printf("a = %d",a);
+        //libération de la surface
+        SDL_FreeSurface(image_add);
+    }
+    //définition du mode de mélange alpha numérique de la surface final
+    SDL_SetSurfaceBlendMode(tileset,SDL_BLENDMODE_BLEND);
+    //Création et rempacement de l'image
+    IMG_SavePNG(tileset,chemin_image_nom_format);
+    //vérification a faire
+    nombre_image++;
+    //limite de pixel par image a gérer (environ 100 m de pixel)
+    //créer la fonction de gestion de la tileset cette dernière devra recrée une nouvelle image tout les x pixel de long (50000 ?) 
+    //gestion de la structure contenant les information lié a la tileset
+    //exemple d'accés a un membre : tileset_image_info.cord_img[0]->y = 45;
+    tileset_image_info.img[nombre_image-1] = tileset;
+    tileset_image_info.cord_img[nombre_image-1] = information_image_add;
+    //ne pas oublier de déallouer les emplacement de mémoire avec la fonction : free();
+    return tileset_image_info;
+    }

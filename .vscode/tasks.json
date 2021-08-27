@@ -3,13 +3,12 @@
         {
             "type": "cppbuild",
             "label": "C/C++: gcc.exe générer le fichier actif",
-            "command": "C:/MinGW/bin/gcc.exe",
+            "command": "",
             "args": [
                 "-g",
-                "${file}",
+                "src\\*.c",
                 "-o",
-                "${fileDirname}\\build\\${fileBasenameNoExtension}.exe",
-                "-std=c11",
+                "build\\Mobius.exe",
                 "-I\"include\" ",
                 "-I\"C:\\libsdl\\include\" ",
                 "-L\"C:\\libsdl\\lib\" ",
@@ -22,7 +21,7 @@
                 "-lSDL2_ttf ",
             ],
             "options": {
-                "cwd": "C:/MinGW/bin"
+                "cwd": "&{workspaceFolder}"
             },
             "problemMatcher": [
                 "$gcc"

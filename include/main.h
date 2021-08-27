@@ -6,8 +6,10 @@
 #include <stddef.h>
 #include <string.h>
 #include <math.h>
+#include <json.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_net.h>
 #include <SDL2/SDL_ttf.h>
 #include <SDL2/SDL_mixer.h>
 #define NOM_LOGICIEL "Mobius"

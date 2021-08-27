@@ -4,7 +4,8 @@
         "cstdlib": "c",
         "sdl_image.h": "c",
         "sdl_ttf.h": "c",
-        "pthread.h": "c"
+        "pthread.h": "c",
+        "algorithm": "c"
     },
     "C_Cpp.errorSquiggles": "Enabled",
     "discord.enabled": true,
@@ -12,5 +13,46 @@
     "C_Cpp.default.cppStandard": "c++11",
     "C_Cpp.default.systemIncludePath": [],
     "C_Cpp.default.includePath": [],
-    "C_Cpp.autocompleteAddParentheses": true
+    "C_Cpp.autocompleteAddParentheses": true,
+    "terminal.integrated.automationShell.linux": "",
+    "shellLauncher.shells.windows": [
+        {
+            "shell": "C:/msys64/usr/bin/zsh.exe",
+            "label": "MSYS2",
+            "args": [
+                "--login",
+                "-i"
+            ],
+            "env": {
+                "MSYSTEM": "MINGW64",
+                "CHERE_INVOKING": "1",
+                "MSYS2_PATH_TYPE": "inherit"
+            }
+        }
+],
+"shellLauncher.shells.osx": [
+
+    {
+        "shell": "/bin/zsh",
+        "label": "bash"
+    },
+    {
+        "shell": "/bin/zsh",
+        "label": "zsh"
+    },
+    {
+        "shell": "zsh",
+        "args": [
+            "-l"
+        ],
+        "label": "zsh login shell"
+    },
+    {
+        "shell": "zsh",
+        "args": [
+            "-l"
+        ],
+        "label": "bash login shell"
+    }
+]
 }
